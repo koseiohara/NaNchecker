@@ -1,23 +1,15 @@
-作成者 : 小原弘聖
-更新 : 2024/03/03
+# NaNchecker
 
-ただ引数のスカラーまたは配列がNaNかどうか判定するだけです。
-呼んでいるのは intrinsic module なので、IEEE_ARITHMETIC などというモジュールを自分で作成する必要はなし、これ単体で機能します。
-ただのラッパールーチンなので、これくらいならプログラムに直接書いたほうが楽な気もしますが、多少シームレスに使えるかと。
+Developer : Kosei Ohara  
+Environment : ifort 19.1.3.304 20200925
 
-通常通り use NaNchecker, only : isNaN をしておき、isNaN(input) のように呼び出してください。
-interface で総称名をつけてあるので、isNaN() を呼べば引数の形に対して勝手に関数を選んでくれます。
-対応している引数の型は次の通り
-	単精度実数のスカラー
-	倍精度実数のスカラー
-	単精度実数の1次元配列
-	倍精度実数の1次元配列
-	単精度実数の2次元配列
-	倍精度実数の2次元配列
-	単精度実数の3次元配列
-	倍精度実数の3次元配列
-なお、配列をインプットにした場合は、要素の中に一つでもNaNがあれば .True. を返します。
-全ての要素がNaNでない場合のみ .False. です。
-すべて一つでもNaNでないものがあったら .False. のような仕様にしたい場合は、any() を all() に書き換えるなど、自由にどうぞ。
-大したモジュールではないので、バグが見つからない限りアップデートしません。
+This module just checks wether the input scalar or array has NaN.  
+IEEE_IS_NAN from IEEE_ARITHMETIC is wrapped  
+
+## Argument
+The argument is a scalar or an array.  
+If it is an array, its dimension must be between 1 and 3.  
+This is available for single and double precision real.  
+If scalar, output is .TRUE. when the value is NaN.  
+If array, output is .TRUE. when one of the element is NaN.
 
